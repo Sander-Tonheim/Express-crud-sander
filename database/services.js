@@ -10,7 +10,7 @@ async function insertIntoUserDatabase(connection, email, password) {
 	return await connection.execute(query, [email, password]);
 }
 
-async function insertIntoBistandDatabase(connection, email, text) {
+async function insertIntoBistandDatabase(connection, text, email) {
 	const query = "INSERT INTO bistand (userName, text) VALUES (?, ?)";
 	return await connection.execute(query, [email, text]);
 }
