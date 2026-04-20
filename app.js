@@ -98,7 +98,7 @@ app.get("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	const connection = await createConnection();
 	const email = req.session.email;
 	const userText = await getUserText(connection, email);
-	res.render("bistand", { text: userText.text });
+	res.render("bistand", { text: userText });
 });
 
 app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
