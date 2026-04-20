@@ -1,0 +1,40 @@
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.car-card {
+	display: grid;
+	/* margin: 0 2rem; */
+	grid-template-columns: 1fr 1fr;
+	max-width: 40rem;
+	margin: 0 auto;
+}
+
+.car-card div {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.car-card ul {
+	display: flex;
+	flex-direction: column;
+}
+
+.car-image {
+	width: 8rem;
+}
+
+@media screen and (max-width: 768px) {
+	.car-card {
+		max-width: 100%;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.car-card {
+		max-width: 100%;
+		grid-template-columns: auto;
+	}
+}
