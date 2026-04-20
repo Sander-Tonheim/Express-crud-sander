@@ -106,7 +106,7 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	const email = req.session.email;
 	const text = req.body.text;
 
-	insertIntoBistandDatabase(connection, email, text);
+	insertIntoBistandDatabase(connection, text, email);
 	res.redirect("/dashboard/bistand");
 });
 
