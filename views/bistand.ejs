@@ -1,7 +1,14 @@
-
 <form method="post">
-    <label for="">Bistand</label>
-    <input name="text" type="text">
-    <button type="submit">Submit</button>
+	<label for="">Bistand</label>
+	<input
+		name="text"
+		type="text" />
+	<button type="submit">Submit</button>
 </form>
-bistand: <%= text %>
+<p>bistand:</p>  <ul>
+    <% text.forEach(text => { %>
+                <li>
+                    <p><%= text.question %></p>
+                </li>
+    <% }) %>
+</ul>
