@@ -11,8 +11,8 @@ async function insertIntoUserDatabase(connection, email, password) {
 }
 
 async function insertIntoBistandDatabase(connection, text, email) {
-	const query = "INSERT INTO bistand (userName, text) VALUES (?, ?)";
-	return await connection.execute(query, [email, text]);
+	const query = "INSERT INTO question (question, email) VALUES (?, ?)";
+	return await connection.execute(query, [text, email]);
 }
 
 async function getUserText(connection, email) {
