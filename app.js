@@ -41,6 +41,13 @@ app.use(
 	}),
 );
 
+// Middleware for å få tilgang til session i navbar for å rendre logg ut knapp.
+app.use((req, res, next) => {
+	// res.locals er et objekt som EJS automatisk har tilgang til
+	res.locals.session = req.session;
+	next();
+});
+
 // parse application/json
 app.use(bodyParser.json());
 
@@ -116,6 +123,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+	res.clearCookie("connect.sid"); // Fjerner cookie fra klienten når den logger ut fra siden
 	req.session.destroy();
 	res.redirect("/");
 });
