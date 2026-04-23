@@ -1,5 +1,19 @@
 <nav>
-	<a href="/">Hjem</a>
-	<a href="/registrer">Til registrering!</a>
-	<a href="/innlogging">Til innlogging!</a>
+<ul>	
+	<% if (session.email) { %>
+		
+		<li><a href="/">Hjem</a></li>
+		<li><a href="/innlogging">Til innlogging!</a></li>
+      <!-- Dette vises hvis session.user eksisterer -->
+      <li>Velkommen, <%= session.email %></li>
+      <li>
+       <a href="/logout"><button>Sign out</button></a> 
+      </li>
+    <% } else { %>
+      <!-- Dette vises hvis brukeren ikke er logget inn -->
+			<li><a href="/">Hjem</a></li>
+			<li><a href="/registrer">Registrer deg</a></li>
+      <li><a href="/innlogging">Logg inn</a></li>
+    <% } %>
+		</ul>
 </nav>
