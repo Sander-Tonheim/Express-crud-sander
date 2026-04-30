@@ -99,7 +99,7 @@ app.post("/innlogging", async (req, res) => {
 });
 
 app.get("/dashboard", isAuthenticated, (req, res) => {
-	res.render("dashboard");
+	res.render("dashboard", { pageStyles: "/css/dashboard.css" });
 });
 
 app.get("/dashboard/bistand", isAuthenticated, async (req, res) => {
