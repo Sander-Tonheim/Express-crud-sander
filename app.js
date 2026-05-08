@@ -127,7 +127,8 @@ app.post("/dashboard/delete", isAuthenticated, async (req, res) => {
 	const connection = await createConnection();
 	deleteUser(connection, req.session.email);
 	req.session.destroy();
-	res.redirect("/login");
+	res.redirect("/signin");
+});
 });
 
 app.get("/logout", (req, res) => {
