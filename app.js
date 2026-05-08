@@ -129,6 +129,9 @@ app.post("/dashboard/delete", isAuthenticated, async (req, res) => {
 	req.session.destroy();
 	res.redirect("/signin");
 });
+
+app.get("/existingUser", (req, res) => {
+	res.render("existingUser");
 });
 
 app.get("/logout", (req, res) => {
