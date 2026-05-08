@@ -118,11 +118,6 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	res.redirect("/dashboard/bistand");
 });
 
-app.get("/about", (req, res) => {
-	// definerer hvordan vi skal svare på forsepørslen (req) fra klienten på denne ruten.
-	res.render("about");
-});
-
 app.get("/logout", (req, res) => {
 	res.clearCookie("connect.sid"); // Fjerner cookie fra klienten når den logger ut fra siden
 	req.session.destroy();
