@@ -39,7 +39,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		cookie: { secure: false, maxAge: 30000000000 },
-	}),
+	})
 );
 
 // Middleware for å få tilgang til session i navbar for å rendre logg ut knapp.
