@@ -22,7 +22,7 @@ async function getUserText(connection, email) {
 	return results;
 }
 
-async function deleteUser(email) {
+async function deleteUser(connection, email) {
 	const deleteUserQuery = "DELETE FROM user WHERE email = ?";
 	connection.execute(deleteUserQuery, [email]);
 
