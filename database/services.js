@@ -33,4 +33,5 @@ module.exports = {
 	insertIntoUserDatabase,
 	insertIntoBistandDatabase,
 	getUserText,
+	deleteUser,
 };
