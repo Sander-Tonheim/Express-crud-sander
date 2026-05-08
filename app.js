@@ -72,6 +72,11 @@ app.post("/signup", async (req, res) => {
 	const connection = await createConnection();
 	const input = req.body;
 	const hashedPassword = bcrypt.hashSync(input.password, saltRounds);
+	const checkForUser = await getUserData(connection, input.email);
+
+	if (checkForUser) {
+		return res.redirect("/existingUser");
+	}
 
 	await insertIntoUserDatabase(connection, input.email, hashedPassword);
 	res.redirect("/registrer");
