@@ -24,9 +24,7 @@ async function getUserText(connection, email) {
 
 async function deleteUser(email) {
 	const deleteUserQuery = "DELETE FROM user WHERE email = ?";
-	connection.execute(deleteUserQuery, [email]);
-
-	connection.end();
+	return await connection.query(deleteUserQuery, [email]);
 }
 module.exports = {
 	getUserData,
