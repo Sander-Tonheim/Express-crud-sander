@@ -123,8 +123,9 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	res.redirect("/dashboard/bistand");
 });
 
-app.post("/dashboard/delete", (req, res) => {
-	deleteUser(req.session.email);
+app.post("/dashboard/delete", isAuthenticated, async (req, res) => {
+	const connection = await createConnection();
+	deleteUser(connection, req.session.email);
 	req.session.destroy();
 	res.redirect("/login");
 });
