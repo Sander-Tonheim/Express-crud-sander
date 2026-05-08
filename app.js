@@ -78,8 +78,7 @@ app.post("/signup", async (req, res) => {
 		return res.redirect("/existingUser");
 	}
 
-	await insertIntoUserDatabase(connection, input.email, hashedPassword);
-	res.redirect("/registrer");
+	res.redirect("/signin");
 });
 
 app.get("/signin", (req, res) => {
