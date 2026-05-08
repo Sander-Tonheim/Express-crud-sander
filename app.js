@@ -19,6 +19,7 @@ const {
 	insertIntoUserDatabase,
 	insertIntoBistandDatabase,
 	getUserText,
+	deleteUser,
 } = require("./database/services");
 const { isAuthenticated } = require("./middleware/authMiddleware");
 
