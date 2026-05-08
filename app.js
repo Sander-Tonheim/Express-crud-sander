@@ -118,6 +118,12 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	res.redirect("/dashboard/bistand");
 });
 
+app.post("/dashboard/delete", (req, res) => {
+	deleteUser(req.session.email);
+	req.session.destroy();
+	res.redirect("/login");
+});
+
 app.get("/logout", (req, res) => {
 	res.clearCookie("connect.sid"); // Fjerner cookie fra klienten når den logger ut fra siden
 	req.session.destroy();
