@@ -64,11 +64,11 @@ app.get("/", async (req, res) => {
 	res.render("index", { cars: results });
 });
 
-app.get("/registrer", (req, res) => {
-	res.render("registrerUser");
+app.get("/signup", (req, res) => {
+	res.render("signup");
 });
 
-app.post("/registrer", async (req, res) => {
+app.post("/signup", async (req, res) => {
 	const connection = await createConnection();
 	const input = req.body;
 	const hashedPassword = bcrypt.hashSync(input.password, saltRounds);
@@ -77,21 +77,21 @@ app.post("/registrer", async (req, res) => {
 	res.redirect("/registrer");
 });
 
-app.get("/innlogging", (req, res) => {
+app.get("/signin", (req, res) => {
 	res.render("signin");
 });
 
-app.post("/innlogging", async (req, res) => {
+app.post("/signin", async (req, res) => {
 	const connection = await createConnection();
 	const userData = req.body;
 	const dbUserInfo = await getUserData(connection, userData.email);
 
 	if (dbUserInfo[0] === undefined) {
-		return res.redirect("/innlogging");
+		return res.redirect("/signin");
 	}
 
 	if (!bcrypt.compareSync(userData.password, dbUserInfo[0].password)) {
-		return res.redirect("/innlogging");
+		return res.redirect("/signin");
 	}
 
 	req.session.email = userData.email;
