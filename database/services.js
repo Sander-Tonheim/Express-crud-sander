@@ -1,6 +1,7 @@
 async function getUserData(connection, email) {
 	const [results] = await connection.query(
-		`SELECT * FROM user WHERE email = "${email}"`
+		"SELECT * FROM user WHERE email = ?",
+		[email]
 	);
 	return results;
 }
@@ -17,7 +18,8 @@ async function insertIntoBistandDatabase(connection, text, email) {
 
 async function getUserText(connection, email) {
 	const [results] = await connection.query(
-		`SELECT * FROM question WHERE email = "${email}"`
+		"SELECT * FROM user WHERE email = ?",
+		[email]
 	);
 	return results;
 }
