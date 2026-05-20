@@ -71,10 +71,9 @@ app.get("/signup", (req, res) => {
 
 app.post("/signup", async (req, res) => {
 	const connection = await createConnection();
-	const input = req.body;
-	const hashedPassword = bcrypt.hashSync(input.password, saltRounds);
-	const checkForUser = await getUserData(connection, input.email);
-
+	const { email, password } = req.body;
+	const hashedPassword = bcrypt.hashSync(password, saltRounds);
+	const checkForUser = await checkForExistingUser(connection, email);
 	if (checkForUser) {
 		return res.redirect("/existingUser");
 	}
