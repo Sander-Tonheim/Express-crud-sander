@@ -20,6 +20,7 @@ const {
 	insertIntoBistandDatabase,
 	getUserText,
 	deleteUser,
+	checkForExistingUser,
 } = require("./database/services");
 const { isAuthenticated } = require("./middleware/authMiddleware");
 
