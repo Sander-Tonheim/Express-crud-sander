@@ -6,6 +6,14 @@ async function getUserData(connection, email) {
 	return results;
 }
 
+async function checkForExistingUser(connection, email) {
+	const [results] = await connection.query(
+		"SELECT * FROM user WHERE email = ?",
+		[email]
+	);
+	return results[0];
+}
+
 async function insertIntoUserDatabase(connection, email, password) {
 	const query = "INSERT INTO user (email, password) VALUES (?, ?)";
 	return await connection.execute(query, [email, password]);
@@ -18,9 +26,11 @@ async function insertIntoBistandDatabase(connection, text, email) {
 
 async function getUserText(connection, email) {
 	const [results] = await connection.query(
-		"SELECT * FROM user WHERE email = ?",
+		"SELECT * FROM question WHERE email = ?",
 		[email]
 	);
+	console.log(results);
+
 	return results;
 }
 
@@ -36,4 +46,5 @@ module.exports = {
 	insertIntoBistandDatabase,
 	getUserText,
 	deleteUser,
+	checkForExistingUser,
 };
