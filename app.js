@@ -62,7 +62,7 @@ app.get("/", async (req, res) => {
 	const results = await getUserData(connection);
 
 	// definerer hvordan vi skal svare på forsepørslen (req) fra klienten på denne ruten.
-	res.render("index", { cars: results });
+	res.render("index", { pageStyles: "/css/index.css" });
 });
 
 app.get("/signup", (req, res) => {
