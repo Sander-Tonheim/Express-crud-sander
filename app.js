@@ -77,7 +77,7 @@ app.post("/signup", async (req, res) => {
 	if (checkForUser) {
 		return res.redirect("/existingUser");
 	}
-
+	await insertIntoUserDatabase(connection, email, hashedPassword);
 	res.redirect("/signin");
 });
 
