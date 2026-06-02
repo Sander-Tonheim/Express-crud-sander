@@ -34,3 +34,14 @@ nav {
 	gap: 1rem;
 	align-items: center;
 }
+
+.get-started-btn {
+	padding: 20px 12px;
+	background-color: #3525cd;
+	color: #fff;
+	border-radius: 8px;
+}
+
+.btn {
+	border-radius: 5px;
+}
