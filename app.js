@@ -105,6 +105,17 @@ app.get("/dashboard", isAuthenticated, async (req, res) => {
 		userAcceptedStatus: userAcceptedStatus,
 	});
 });
+
+app.post("/user-choice", async (req, res) => {
+	const connection = await createConnection();
+	const email = req.session.email;
+	const choice = req.body.choice;
+
+	await connection.query("UPDATE user SET accepted = ? WHERE email = ?", [
+		choice,
+		email,
+	]);
+	res.redirect("/dashboard");
 });
 
 app.get("/dashboard/bistand", isAuthenticated, async (req, res) => {
