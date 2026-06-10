@@ -57,12 +57,6 @@ app.use(bodyParser.json());
 
 // Definerer hva som skal skje når vi får inn en forespørsel (req) med GET motode i http header
 app.get("/", async (req, res) => {
-	// åpner en ny mysql tilkobling
-	const connection = await createConnection();
-	// henter data fra databasen.
-	const results = await getUserData(connection);
-
-	// definerer hvordan vi skal svare på forsepørslen (req) fra klienten på denne ruten.
 	res.render("index", { pageStyles: "/css/index.css" });
 });
 
