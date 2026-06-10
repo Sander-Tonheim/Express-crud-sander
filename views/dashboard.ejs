@@ -1,12 +1,66 @@
-<h1>You logged in successfully</h1>
-<a href="/dashboard/bistand">Bistand</a>
-<a href="/logout">Logout</a>
-<form
-	method="post"
-	action="/dashboard/delete">
-	<button
-		class="button"
-		type="submit">
-		Delete
-	</button>
-</form>
+<h1>Dashboard</h1>
+
+<p>Velkommen <%= email %></p>
+<% console.log(typeof userAcceptedStatus); %>
+
+<!-- Brukeren har ikke valgt ennå -->
+<% if (userAcceptedStatus === null) { %>
+
+<div class="box">
+	<h3>Velg et alternativ</h3>
+
+	<p>
+		Godtar du vilkårene? Hvis du ikke godtar, vil sletteknappen være
+		tilgjengelig.
+	</p>
+
+	<form
+		action="/user-choice"
+		method="POST">
+		<button
+			type="submit"
+			name="choice"
+			value="1"
+			class="accept-btn">
+			Godta
+		</button>
+
+		<button
+			type="submit"
+			name="choice"
+			value="0"
+			class="decline-btn">
+			Ikke godta
+		</button>
+	</form>
+</div>
+
+<% } else if (userAcceptedStatus === 1) { %>
+
+<!-- Brukeren har godtatt -->
+
+<div class="box">
+	<h3>Status</h3>
+	<p>Du har godtatt vilkårene.</p>
+	<p>Sletteknappen er skjult.</p>
+</div>
+
+<% } else if (userAcceptedStatus === 0) { %>
+
+<!-- Brukeren har avslått -->
+
+<div class="box">
+	<h3>Status</h3>
+	<p>Du har valgt å ikke godta vilkårene.</p>
+	<form
+		method="post"
+		action="/dashboard/delete">
+		<button
+			class="button"
+			type="submit">
+			Delete
+		</button>
+	</form>
+</div>
+
+<% } %>
