@@ -17,6 +17,9 @@ nav {
 	padding: 0 4rem;
 	border-bottom: 1px solid hsl(60, 1%, 17%);
 	height: 5rem;
+	position: sticky;
+	top: 0;
+	background-color: #fff;
 }
 .logo-image {
 	width: 100%;
