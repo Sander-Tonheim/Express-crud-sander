@@ -30,7 +30,6 @@ async function getUserText(connection, email) {
 		"SELECT * FROM question WHERE email = ?",
 		[email]
 	);
-	console.log(results);
 
 	return results;
 }
