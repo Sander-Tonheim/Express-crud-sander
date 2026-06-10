@@ -60,6 +60,10 @@ app.get("/", async (req, res) => {
 	res.render("index", { pageStyles: "/css/index.css" });
 });
 
+app.get("/info", async (req, res) => {
+	res.render("info");
+});
+
 app.get("/signup", (req, res) => {
 	res.render("signup");
 });
