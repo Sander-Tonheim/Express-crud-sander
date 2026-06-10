@@ -91,16 +91,15 @@ app.get("/signin", (req, res) => {
 
 app.post("/signin", async (req, res) => {
 	const connection = await createConnection();
-	const userData = req.body;
-	const dbUserInfo = await getUserData(connection, userData.email);
-
+	const { email, password } = req.body;
+	const dbUserInfo = await getUserData(connection, email);
 	if (dbUserInfo[0] === undefined) {
 		return res.redirect("/signin");
 	}
-
-	if (!bcrypt.compareSync(userData.password, dbUserInfo[0].password)) {
+	if (!bcrypt.compareSync(password, dbUserInfo[0].password)) {
 		return res.redirect("/signin");
 	}
+	req.session.email = email;
 
 	const emailText =
 		"Velkommen ti din fantstiske konto her hos oss! Nå som du er logget inn kan du gjøre alt du har drømt om. Om du ønsker å slette kontoen din må dette gjøres før du har sendt inn spørsmål. /n Dersom du har sendt inn spørsmål må du kontakte IT-avdeling for å be om sletting av konto. ";
