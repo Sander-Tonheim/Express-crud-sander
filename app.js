@@ -94,8 +94,17 @@ app.post("/signin", async (req, res) => {
 	return res.redirect("/dashboard");
 });
 
-app.get("/dashboard", isAuthenticated, (req, res) => {
-	res.render("dashboard", { pageStyles: "/css/dashboard.css" });
+app.get("/dashboard", isAuthenticated, async (req, res) => {
+	const connection = await createConnection();
+	const userData = await getUserData(connection, req.session.email);
+	const userAcceptedStatus = userData[0].accepted;
+
+	res.render("dashboard", {
+		pageStyles: "/css/dashboard.css",
+		email: req.session.email,
+		userAcceptedStatus: userAcceptedStatus,
+	});
+});
 });
 
 app.get("/dashboard/bistand", isAuthenticated, async (req, res) => {
