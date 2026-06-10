@@ -79,6 +79,9 @@ app.post("/signup", async (req, res) => {
 		return res.redirect("/existingUser");
 	}
 	await insertIntoUserDatabase(connection, email, hashedPassword);
+	const emailText =
+		"Tusen takk for at du har registrert deg! Velkommen til oss!";
+	await sendMail(email, "Velkommen", emailText);
 	res.redirect("/signin");
 });
 
@@ -99,7 +102,9 @@ app.post("/signin", async (req, res) => {
 		return res.redirect("/signin");
 	}
 
-	req.session.email = userData.email;
+	const emailText =
+		"Velkommen ti din fantstiske konto her hos oss! Nå som du er logget inn kan du gjøre alt du har drømt om. Om du ønsker å slette kontoen din må dette gjøres før du har sendt inn spørsmål. /n Dersom du har sendt inn spørsmål må du kontakte IT-avdeling for å be om sletting av konto. ";
+	sendMail(email, "Første innlogging", emailText);
 
 	return res.redirect("/dashboard");
 });
@@ -121,6 +126,10 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	const text = req.body.text;
 
 	insertIntoBistandDatabase(connection, text, email);
+	const emailText =
+		"Du har nå sendt inn en henvendelse til oss. Din henvendelse lyder som følger:" +
+		`${text}` +
+		"Om det er feil vennligst ta kontakt med IT-avdelingen.";
 	res.redirect("/dashboard/bistand");
 });
 
