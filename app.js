@@ -1,5 +1,4 @@
 // importerer pakker.
-
 const express = require("express");
 const mysql = require("mysql2/promise");
 const bodyParser = require("body-parser");
@@ -7,12 +6,6 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
-
-const app = express();
-
-// Definerer hvilken port som skal være åpen for å motta forespørsler (req) fra klient.
-const port = 3000;
-// importerer funkjson som lager kobling til databasen.
 const { createConnection } = require("./database/database");
 const {
 	getUserData,
@@ -25,17 +18,14 @@ const {
 } = require("./database/services");
 const { isAuthenticated } = require("./middleware/authMiddleware");
 
-// konfigurerer EJS som malmotor.
+const app = express();
+const port = 3000;
+
 app.set("view engine", "ejs");
-// serverer statiske filer.
-app.use(express.static("public"));
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded());
-
-app.use(expressLayouts);
-
 app.set("layout", "partials/master");
-
+app.use(expressLayouts);
+app.use(bodyParser.urlencoded());
+app.use(express.static("public"));
 app.use(
 	session({
 		secret: "keyboard cat",
@@ -44,18 +34,16 @@ app.use(
 		cookie: { secure: false, maxAge: 30000000000 },
 	})
 );
-
 // Middleware for å få tilgang til session i navbar for å rendre logg ut knapp.
 app.use((req, res, next) => {
 	// res.locals er et objekt som EJS automatisk har tilgang til
 	res.locals.session = req.session;
 	next();
 });
-
 // parse application/json
 app.use(bodyParser.json());
 
-// Definerer hva som skal skje når vi får inn en forespørsel (req) med GET motode i http header
+/* ruter */
 app.get("/", async (req, res) => {
 	res.render("index", { pageStyles: "/css/index.css" });
 });
@@ -142,7 +130,7 @@ app.get("/existingUser", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-	res.clearCookie("connect.sid"); // Fjerner cookie fra klienten når den logger ut fra siden
+	res.clearCookie("connect.sid");
 	req.session.destroy();
 	res.redirect("/");
 });
