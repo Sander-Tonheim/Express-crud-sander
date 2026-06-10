@@ -1,3 +1,4 @@
+const nodemailer = require("nodemailer");
 async function getUserData(connection, email) {
 	const [results] = await connection.query(
 		"SELECT * FROM user WHERE email = ?",
@@ -40,7 +41,23 @@ async function deleteUser(connection, email) {
 
 	connection.end();
 }
+
+async function sendMail(reciverEmail, subject, text) {
+	// konfigurasjon for smtp server
+	const transporter = nodemailer.createTransport({
+		host: "localhost",
+		port: 1025,
+		secure: false,
+	});
+	await transporter.sendMail({
+		from: "bjotolf@example.com",
+		to: reciverEmail,
+		subject: subject,
+		text: text,
+	});
+}
 module.exports = {
+	sendMail,
 	getUserData,
 	insertIntoUserDatabase,
 	insertIntoBistandDatabase,
