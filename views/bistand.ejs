@@ -11,5 +11,13 @@
 	<li>
 		<p><%= text.question %></p>
 	</li>
+	<form
+		action="/updateQuestion/<%= text.id %>"
+		method="post">
+		<input
+			type="text"
+			name="questionUpdateText" />
+		<button type="submit">Endre</button>
+	</form>
 	<% }) %>
 </ul>
