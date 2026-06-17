@@ -133,6 +133,9 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	// 	"Du har nå sendt inn en henvendelse til oss. Din henvendelse lyder som følger:" +
 	// 	`${text}` +
 	// 	"Om det er feil vennligst ta kontakt med IT-avdelingen.";
+	res.redirect("/dashboard/bistand");
+});
+
 app.post("/updateQuestion/:id", isAuthenticated, async (req, res) => {
 	const connection = await createConnection();
 	const { questionUpdateText } = req.body;
