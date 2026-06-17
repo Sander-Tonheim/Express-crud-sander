@@ -34,6 +34,11 @@ async function getUserText(connection, email) {
 	return results;
 }
 
+async function updateQuestion(connection, email, questionId, updatedQuestion) {
+	const query = "UPDATE question SET question = ? WHERE id = ? ";
+	return await connection.execute(query, [updatedQuestion, questionId]);
+}
+
 async function deleteUser(connection, email) {
 	const deleteUserQuery = "DELETE FROM user WHERE email = ?";
 	connection.execute(deleteUserQuery, [email]);
@@ -63,4 +68,5 @@ module.exports = {
 	getUserText,
 	deleteUser,
 	checkForExistingUser,
+	updateQuestion,
 };
