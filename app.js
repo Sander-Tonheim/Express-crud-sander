@@ -15,6 +15,7 @@ const {
 	deleteUser,
 	checkForExistingUser,
 	sendMail,
+	updateQuestion,
 } = require("./database/services");
 const { isAuthenticated } = require("./middleware/authMiddleware");
 
@@ -129,12 +130,12 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	const connection = await createConnection();
 	const email = req.session.email;
 	const text = req.body.text;
-
-	insertIntoBistandDatabase(connection, text, email);
-	const emailText =
-		"Du har nå sendt inn en henvendelse til oss. Din henvendelse lyder som følger:" +
-		`${text}` +
-		"Om det er feil vennligst ta kontakt med IT-avdelingen.";
+app.post("/updateQuestion/:id", isAuthenticated, async (req, res) => {
+	const connection = await createConnection();
+	const { questionUpdateText } = req.body;
+	const questionId = req.params.id;
+	const email = req.session.email;
+	await updateQuestion(connection, email, questionId, questionUpdateText);
 	res.redirect("/dashboard/bistand");
 });
 
