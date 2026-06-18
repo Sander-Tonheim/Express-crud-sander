@@ -146,6 +146,17 @@ app.post("/updateQuestion/:id", isAuthenticated, async (req, res) => {
 	res.redirect("/dashboard/bistand");
 });
 
+app.post("/delete-post/:id", isAuthenticated, async (req, res) => {
+	console.log(req.params);
+
+	const connection = await createConnection();
+	const questionId = req.params.id;
+	console.log("param id:", questionId);
+
+	await deleteQuestion(connection, questionId);
+	return res.redirect("/dashboard/bistand");
+});
+
 app.post("/dashboard/delete", isAuthenticated, async (req, res) => {
 	const connection = await createConnection();
 	deleteUser(connection, req.session.email);
