@@ -38,6 +38,15 @@ async function updateQuestion(connection, email, questionId, updatedQuestion) {
 	const query = "UPDATE question SET question = ? WHERE id = ? ";
 	return await connection.execute(query, [updatedQuestion, questionId]);
 }
+async function deleteQuestion(connection, questionId) {
+	console.log(questionId);
+
+	const deletePost = "DELETE FROM question WHERE id = ?";
+	connection.execute(deletePost, [questionId]);
+
+	connection.end();
+	return;
+}
 
 async function deleteUser(connection, email) {
 	const deleteUserQuery = "DELETE FROM user WHERE email = ?";
