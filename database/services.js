@@ -78,4 +78,5 @@ module.exports = {
 	deleteUser,
 	checkForExistingUser,
 	updateQuestion,
+	deleteQuestion,
 };
