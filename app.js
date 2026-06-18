@@ -16,6 +16,7 @@ const {
 	checkForExistingUser,
 	sendMail,
 	updateQuestion,
+	deleteQuestion,
 } = require("./database/services");
 const { isAuthenticated } = require("./middleware/authMiddleware");
 
