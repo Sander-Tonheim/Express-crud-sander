@@ -132,6 +132,9 @@ app.post("/dashboard/bistand", isAuthenticated, async (req, res) => {
 	const connection = await createConnection();
 	const email = req.session.email;
 	const text = req.body.text;
+	const userId = req.session.user_id;
+
+	await insertIntoBistandDatabase(connection, text, email, userId);
 	// const emailText =
 	// 	"Du har nå sendt inn en henvendelse til oss. Din henvendelse lyder som følger:" +
 	// 	`${text}` +
